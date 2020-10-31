@@ -1,7 +1,6 @@
 <ion-app>
   <ion-split-pane contentId="main-content">
-    <ion-menu side="start" contentId="main-content" type="overlay">
-      <!-- Settings Toolbar -->
+    <!-- <ion-menu side="start" contentId="main-content" type="overlay">
       <ion-header class="background-size"
       [ngStyle]="{'background-image': 'url(' + headerMenuItem.background + ')'}">
           <ion-item class="transparent ion-text-center" lines="none">
@@ -12,12 +11,10 @@
             </ion-label>
           </ion-item>
       </ion-header>
-      <!-- Content -->
       <ion-content>
         <ion-grid class="ion-no-padding">
           <ion-row>
             <ion-col size="12" class="ion-no-padding">
-              <!-- Menu List -->
               <ion-list>
                 <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
                   <ion-item [routerDirection]="'root'" (click)="openPage(p)">
@@ -32,7 +29,7 @@
           </ion-row>
         </ion-grid>
       </ion-content>
-    </ion-menu>
+    </ion-menu> -->
     <ion-router-outlet id="main-content"></ion-router-outlet>
   </ion-split-pane>
 </ion-app>
