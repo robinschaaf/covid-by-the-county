@@ -1,0 +1,40 @@
+<!-- ANIMATION --COMPONENT 4 -->
+<ion-grid *ngIf="data && data.items">
+  <ion-row appAnimateItems className="fadeInUp">
+    <ion-col size="12" size-md="6" *ngFor="let item of data.items"
+    class="animation-normal opacity-0">
+      <ion-card class="ion-text-start box-shadow ion-no-margin border-radius"
+      (click)="onItemClickFunc(item, $event)">
+        <div class="card-image">
+          <!--Card image-->
+          <img [src]="item.image" />
+          <div class="card-title-section ion-padding">
+            <!--Card title-->
+            <h2 class="text-size-xl text-color-light font-bold ion-text-wrap
+            ion-float-start ion-no-margin">{{item.title}}</h2>
+            <!-- Share Button --->
+              <ion-button class="button-action-shit ion-float-end">
+                <ion-icon class="icon-medium" [name]="item.shareIcon"></ion-icon>
+              </ion-button>
+          </div>
+        </div>
+        <!--Card content-->
+        <ion-card-content class="transparent">
+          <!--Card subtitle-->
+          <h1 class="text-size-md text-color-secondary font-bold
+          ion-text-wrap ion-padding-top">{{item.subtitle}}</h1>
+          <!--Card description-->
+          <p class="text-size-xs text-color-secondary font-light ion-padding-top">
+            {{item.description}}</p>
+          <ion-item lines="none" class="ion-no-padding ion-margin-top">
+            <p slot="start" class="text-size-xl text-color-primary font-bold">
+              {{item.price}}</p>
+            <ion-button class="default-button" slot="end">
+              {{item.button}}
+            </ion-button>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>

@@ -1,0 +1,120 @@
+<ion-app>
+  <!-- Header -->
+  <ion-header>
+    <ion-toolbar>
+      <!-- <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons> -->
+      <ion-title>COVID Case Alerts</ion-title>
+      <ion-buttons slot="end">
+        <ion-button class="button-icon" [routerLink]="['/settings-page']">
+          <ion-icon class="icon-small" slot="start" name="settings"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+    <ion-toolbar>
+      <ion-searchbar [(ngModel)]="search" (ionChange)="onTextChangeFunc($event)" placeholder="Zip, city or county name">
+      </ion-searchbar>
+    </ion-toolbar>
+  </ion-header>
+  <!-- Content -->
+  <ion-content class="transparent">
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content
+        pullingIcon="chevron-down-circle-outline"
+        pullingText="Pull to update"
+        refreshingSpinner="null"
+        refreshingText="">
+      </ion-refresher-content>
+    </ion-refresher>
+    <ion-grid>
+      <ion-row *ngIf="displayRefresh ion-margin-horizontal" class="spinner ion-text-center">
+        <ion-col size="12"><ion-spinner></ion-spinner></ion-col>
+      </ion-row>
+      <ion-row *ngIf="filteredCounties !== null && !!search" class="ion-no-margin searchResults">
+        <ion-col size="12" class="ion-no-padding searchInner">
+          <ion-list class="ion-no-margin" class="">
+            <ion-item *ngFor="let county of filteredCounties" class="ion-no-padding">
+              <ion-label class="ion-padding">
+                <h2 *ngIf="!county.isCountyMatch" class="text-size-md text-color-primary ion-text-wrap">
+                  <span class="font-light">{{county.city}},</span>
+                </h2>
+                <h2 class="text-size-md text-color-primary ion-text-wrap">
+                  <span class="font-bold">{{county.county_name}}, {{county.state}}</span>
+                </h2>
+                <h2 *ngIf="county.alreadyAdded" class="text-size-sm text-color-primary ion-text-wrap">
+                  <span class="font-light font-smaller" style="font-style:italic;">{{county.county_name}} is already added</span>
+                </h2>
+              </ion-label>
+              <ion-button class="default-button box-shadow" [class.button-disabled]="county.alreadyAdded" (click)="onCountyClickFunc(county.county_fips, $event)">Add</ion-button>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="filteredCounties.length === 0 && !!search && search.length > 1 && !displayRefresh" class="ion-no-margin noResults">
+        <ion-col size="12">
+          <h5>Sorry, no matching counties are available</h5>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12" class="ion-align-items-center ion-align-self-start" *ngIf="filteredCounties.length === 0 && counties.length === 0 && !loadingCounties">
+          <div class="ion-text-left">
+            <h2 class="text-size-xs">
+              Counties you add will be displayed here with the latest coronavirus case counts
+            </h2>
+          </div>
+        </ion-col>
+        <ion-col size="12" class="ion-no-padding ion-no-margin" *ngIf="counties != null && counties.length > 0">
+            <ion-row style="max-height:30px">
+              <ion-col class="ion-float-left"><h3 class="text-size-sm text-color-primary font-light asOfDate">Counts are as of {{lastUpdate}}</h3></ion-col>
+              <ion-col><ion-spinner *ngIf="loadingCounties" class="ion-float-right xs-spinner font-light"></ion-spinner></ion-col>
+            </ion-row>
+            <ion-list>
+              <ul class="collapsible ion-no-margin ion-no-padding">
+                <li *ngFor="let county of counties" class="countyList" [class]="county.className">
+                    <div class="collapsible-header" (click)="toggleGroup(county)">
+                      <ion-item>
+                        <ion-label>
+                          <h2 class="text-size-md text-color-primary font-bold">
+                            {{county.county_name}}, {{county.state}} <span class="text-size-sm text-color-primary font-light">pop. {{county.population}}</span></h2>
+                          <h3 class="text-size-sm text-color-primary font-light" *ngIf="county.data[0]">
+                            +{{county.data[0].cases_count}} {{ 'case' | plural : 'Case' : 'Cases' : county.data[0].cases_count }}
+                            <i class="icon {{county.icon}} icon-small"></i>
+                          </h3>
+                        </ion-label>
+                      </ion-item>
+                    </div>
+                  
+                  <div class="item-accordion itemWrapper" [ngStyle]="{'max-height': (county.show ? '590px' : 0)}">
+                    <ion-item class="transparent">
+                      <ion-label class="text-size-sm text-color-primary"></ion-label>
+                      <ion-label class="text-size-sm text-color-primary ion-text-center">Cases</ion-label>
+                      <ion-label *ngIf="settings.deathsChecked" class="text-size-sm text-color-primary ion-text-center">Deaths</ion-label>
+                      <ion-label *ngIf="settings.perChecked" class="text-size-sm text-color-primary ion-text-center">Cases/100k</ion-label>
+                    </ion-item>
+                    <ion-item class="transparent" *ngFor="let data of county.data">
+                      <ion-label class="text-size-sm text-color-primary">{{data.displayDate}}</ion-label>
+                      <ion-label class="text-size-sm text-color-primary ion-text-center">{{data.cases_count}}</ion-label>
+                      <ion-label *ngIf="settings.deathsChecked" class="text-size-sm text-color-primary ion-text-center">{{data.deaths_count}}</ion-label>
+                      <ion-label *ngIf="settings.perChecked" class="text-size-sm text-color-primary ion-text-center">{{data.countPer100k}}</ion-label>
+                    </ion-item>
+                    <ion-button fill="clear" class="ion-margin" color="primary" size="small" (click)="onRemoveCountyClickFunc(county, $event)">Remove County</ion-button>
+                    <br />
+                  </div>
+                </li>
+              </ul>
+          </ion-list>
+        </ion-col>
+        <ion-col size="12" class="ion-align-self-end">
+          <ion-item lines="none" [routerLink]="['/info-page']">
+            <ion-label>
+              <p class="ion-text-wrap text-size-xs">About this app</p>
+            </ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-backdrop (backdropDismiss)="clearSearch()" *ngIf="filteredCounties !== null && filteredCounties.length > 0 && !!search"></ion-backdrop>
+
+    </ion-grid>
+  </ion-content>
+</ion-app>

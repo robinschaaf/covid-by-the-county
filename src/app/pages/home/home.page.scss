@@ -1,0 +1,76 @@
+
+ion-grid,
+ion-row {
+  height: 100%;
+}
+
+ion-item {
+  --background: transparent;
+}
+
+ion-list {
+  background: rgba(255,255,255,.6);
+}
+
+.searchResults ion-list,
+.noResults {
+  background: rgba(255,255,255,.95);
+}
+
+.noResults {
+  position: absolute;
+  overflow-y: scroll;
+  z-index: 999;
+  top: -21px;
+  width: 97%;
+}
+
+.searchResults {
+  position: absolute;
+  overflow-y: scroll;
+  z-index: 999;
+  top: -21px;
+  width: 97%;
+  
+  ion-item {
+      z-index: 100;
+  }
+}
+
+.searchInner {
+  z-index: 5;
+}
+
+.spinner {
+  background-color: white;
+  height: 72px;
+  margin-top: -11px;
+}
+
+.asOfDate {
+  margin: 0;
+}
+
+.itemWrapper {
+  transition: all .3s ease-in-out;
+  overflow: auto;
+}
+
+li.countyList.new {
+  transition: all 0.5s ease-out;
+  opacity: 0;
+}
+
+li.countyList.show {
+  transition: all 0.5s ease-in;
+  opacity: 1;
+}
+
+ion-backdrop {
+  opacity: .05;
+}
+
+.xs-spinner {
+  width: 18px;
+  height: 18px;
+}

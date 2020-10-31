@@ -1,0 +1,22 @@
+<!-- ANIMATION --COMPONENT 3 -->
+<ion-grid *ngIf="data && data.items">
+  <ion-row appAnimateItems className="bounceIn">
+    <ion-col size="12" size-sm="6" *ngFor="let item of data.items"
+    class="animation-slow opacity-0">
+      <ion-card class="background-size box-shadow ion-no-margin border-radius"
+      (click)="onEvent('onItemClick', item, $event)"
+      [ngStyle]="{'background-image': 'url(' + item.backgroundImage + ')'}">
+        <ion-item lines="none" class="transparent">
+          <!--Card-content-->
+          <ion-label>
+            <h2 class="text-size-xl text-color-light font-bold ion-text-wrap">
+              {{item.title}}</h2>
+            <!--Description-->
+            <h3 class="text-size-xs text-color-light font-light
+            ion-text-wrap ion-padding-top">{{item.description}}</h3>
+          </ion-label>
+        </ion-item>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>

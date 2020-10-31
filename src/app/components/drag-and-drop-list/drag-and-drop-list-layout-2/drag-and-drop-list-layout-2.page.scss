@@ -1,0 +1,18 @@
+/* Style component 2
+========================================================*/
+:host {
+  --size-ion-small-thumbnail: 72px !important;
+}
+
+ion-list-header {
+
+  ion-button {
+    display: flex;
+    align-self: flex-end;
+  }
+}
+
+ion-thumbnail {
+  height: var(--size-ion-small-thumbnail);
+  width: var(--size-ion-small-thumbnail);
+}

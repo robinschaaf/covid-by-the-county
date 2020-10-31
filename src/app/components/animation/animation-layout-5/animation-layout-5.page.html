@@ -1,0 +1,26 @@
+<!-- ANIMATION --COMPONENT 5 -->
+<ion-grid *ngIf="data && data.items">
+  <ion-row appAnimateItems className="zoomIn">
+    <ion-col size="12" size-md="6" *ngFor="let item of data.items" class="animation-fast opacity-0">
+      <ion-card class="box-shadow ion-no-margin ion-text-center border-radius"
+      (click)="onItemClickFunc(item, $event)">
+        <ion-item lines="none">
+          <ion-label>
+            <!-- Card Title -->
+            <h2 class="ion-card-title text-size-xl text-color-primary
+            font-regular ion-text-wrap">{{item.title}}</h2>
+          </ion-label>
+          <!-- Card Badge -->
+          <ion-badge slot="end">{{item.button}}</ion-badge>
+        </ion-item>
+        <ion-card-content class="ion-no-padding">
+          <ion-img [src]="item.image"></ion-img>
+          <!-- Card Subtitle -->
+          <p class="ion-card-subtitle text-size-p text-color-light
+          font-bold ion-padding ion-text-start">{{item.subtitle}}</p>
+          <span class="new-category">{{item.category}}</span>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>

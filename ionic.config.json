@@ -1,8 +1,8 @@
 {
-  "name": "CovidByTheCounty",
+  "name": "blank",
   "integrations": {
+    "cordova": {},
     "capacitor": {}
   },
-  "type": "react",
-  "id": "831ee1c8"
+  "type": "angular"
 }

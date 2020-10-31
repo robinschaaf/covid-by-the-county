@@ -1,0 +1,40 @@
+/* Settings Scroll Segment
+===========================================*/
+// Setting scrollable toolbar
+:host {
+  --st-scrollable-toolbar-padding-left: 5px !important;
+}
+// Setting scroll button
+
+.ion-color-primary {
+  background: var(--cs-background-primary) !important;
+  --ion-color-contrast: var(--cs-background-accent) !important;
+}
+
+super-tabs-toolbar {
+  padding-top: 8px;
+}
+
+.page1 {
+  .info-section {
+    background: var(--cs-background-accent);
+  }
+
+  ion-card {
+    ion-avatar {
+      height: 100px;
+      width: 100px;
+    }
+
+    .social-share {
+      padding: 10px 0;
+      display: flex;
+      justify-content: space-around;
+      text-align: center;
+    }
+
+    ion-item {
+      --inner-padding-end: 0;
+    }
+  }
+}

@@ -1,0 +1,55 @@
+<!-- ANIMATION --COMPONENT 7 -->
+<ion-grid *ngIf="data && data.items">
+  <ion-row>
+    <ion-col size="12">
+      <ion-card class="ion-text-center box-shadow">
+        <ion-avatar>
+          <img [src]="data.image" alt="">
+        </ion-avatar>
+        <ion-card-content>
+          <h1 class="text-size-md text-color-primary font-bold">
+            {{data.title}}</h1>
+          <p class="text-size-xs text-color-primary font-light">
+            {{data.subtitle}}</p>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <!---- Category Name -->
+    <ion-col>
+        <h2 class="ion-text-center ion-no-margin text-size-xs
+         text-color-primary ion-text-uppercase font-bold">
+         {{data.category}}</h2>
+    </ion-col>
+    </ion-row>
+    <ion-row appAnimateItems className="bounceInRight">
+    <!-- List Post -->
+    <ion-col size="12" class="ion-text-center animation-fast opacity-0"
+    *ngFor="let item of data.items"
+    (click)="onItemClickFunc(item, $event)">
+      <ion-card box-shadow>
+        <ion-card-content class="ion-text-center">
+          <span class="text-size-xs text-color-primary
+          font-bold ion-text-capitalize">{{item.category}}</span>
+          <h2 class="text-size-md ion-text-wrap text-color-primary
+          font-regular ion-padding-top">{{item.title}}</h2>
+        </ion-card-content>
+        <ion-button class="button-icon ion-text-capitalize"
+        (click)="onLikeFunc(item, $event)">
+          <ion-icon class="icon-small" slot="start"
+          [ngClass]="{'active' : item.like.isActive}"
+          [name]="item.like.icon">
+          </ion-icon>
+          {{item.like.number}} {{item.like.text}}
+        </ion-button>
+        <ion-button class="button-icon ion-text-capitalize"
+        (click)="onCommentFunc(item, $event)">
+          <ion-icon class="icon-small" slot="start"
+          [ngClass]="{'active' : item.comment.isActive}"
+          [name]="item.comment.icon">
+          </ion-icon>
+          {{item.comment.number}} {{item.comment.text}}
+        </ion-button>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>

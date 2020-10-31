@@ -1,0 +1,17 @@
+ion-row {
+  border-bottom: solid .55px #C7C7CC;
+}
+
+.updateButton {
+  --border-radius: 6px;
+  --padding-top: 0;
+  --padding-start: 0.9em;
+  --padding-end: 0.9em;
+  --padding-bottom: 0;
+  height: 2.1em;
+  font-size: 13px;
+
+  [slot=start] {
+    margin-inline-end: 4px !important;
+  }
+}

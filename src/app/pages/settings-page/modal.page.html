@@ -1,0 +1,53 @@
+
+<ion-app>
+  <ion-content class="transparent">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <h4 style="margin-top: 3px;">Settings for {{county.county_name}}, {{county.state}}</h4>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="9" class="ion-align-self-center ion-padding-start">
+          <ion-label class="">
+            <div class="text-color-primary ion-text-wrap">
+              <span class="font-light">Number of Days to Display</span>
+            </div>
+          </ion-label>
+        </ion-col>
+        <ion-col size="3" class="ion-align-self-center">
+          <ion-select interface="popover" [ngModel]="county.default_days" multiple="false" (ionChange)="onChangeCountyDefaultDays($event)">
+            <ion-select-option value="">Use default</ion-select-option>
+            <ion-select-option *ngFor="let i of allowedDays" [value]="i">{{i}}</ion-select-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="10" class="ion-align-self-center ion-padding-start">
+          <ion-label class="">
+            <div class="text-color-primary ion-text-wrap">
+              <span class="font-light">Send Push Notications</span>
+            </div>
+          </ion-label>
+        </ion-col>
+        <ion-col size="2" class="ion-align-self-center">
+          <ion-label class="">
+            <ion-toggle
+              slot="end"
+              (ionChange)="onChangedPushEnabled($event)"
+              [checked]="county.enabled === 1"
+              style="right: 10px;">
+            </ion-toggle>
+          </ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
+  <ion-footer class="ion-no-border ion-padding">
+    <ion-toolbar>
+      <ion-button class="default-button box-shadow" (click)="saveAndCloseModal()" >Save</ion-button>
+      <ion-button class="default-button box-shadow" (click)="closeModal()" color="light">Cancel</ion-button>
+      
+    </ion-toolbar>
+  </ion-footer>
+</ion-app>

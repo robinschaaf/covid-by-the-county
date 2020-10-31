@@ -1,0 +1,13 @@
+<ion-list lines="none" *ngIf="data != null">
+    <ion-item>
+      <h2 class="text-size-xs text-color-accent font-regular" slot="start">{{data.title}}</h2>
+      <ion-badge class="new-category" slot="end">{{data.value}}</ion-badge>
+    </ion-item>
+    <ion-item>
+        <ion-range [min]="data.min" [max]="data.max" pin="true" (ionChange)="onChangeFunc($event)"
+            [(ngModel)]="data.value">
+            <i slot="start" class="icon {{data.iconLeft}} icon-medium text-color-secondary"></i>
+            <i slot="end" class="icon {{data.iconRight}} icon-large text-color-secondary"></i>
+        </ion-range>
+    </ion-item>
+</ion-list>

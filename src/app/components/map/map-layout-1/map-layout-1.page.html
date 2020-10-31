@@ -1,0 +1,84 @@
+<!--Theme GMAPS + Location  Details -->
+<ion-page class="ion-page" *ngIf="viewEntered">
+  <!-- Header -->
+  <ion-header>
+    <ion-toolbar class="box-shadow">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/"></ion-back-button>
+      </ion-buttons>
+      <ion-title class="ion-text-capitalize">{{data.toolbarTitle}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <!--Content -->
+  <ion-content scrollEvents="true" parallax-header>
+    <div class="header-image">
+      <agm-map *ngIf="data != null"
+      [latitude]="data.map.lat"
+      [longitude]="data.map.lng"
+      [zoom]="data.map.zoom"
+      [mapTypeControl]="data.map.mapTypeControl"
+      [streetViewControl]="data.map.streetViewControl">
+        <agm-marker [latitude]="data.map.lat"
+        [longitude]="data.map.lng">
+        </agm-marker>
+      </agm-map>
+    </div>
+    <ion-grid class="ion-no-padding" *ngIf="data != null">
+      <ion-row>
+        <ion-col size="12" class="ion-no-padding">
+          <ion-card class="ion-no-padding no-box-shadow ion-no-margin">
+                            <!--Parallax Title-->
+            <ion-item lines="none">
+              <ion-label class="ion-padding-top ion-padding-end">
+                <h1 class="text-size-md text-wrap text-color-accent">
+                  {{data.title}}</h1>
+              </ion-label>
+            </ion-item>
+
+            <ion-item class="ion-no-padding">
+              <ion-label class="ion-align-items-center ion-padding-start">
+                <!--Parallax Rateing-->
+                <span *ngFor="let item of data.iconsStars;let i = index"
+                (click)="onRatesFunc(data.iconsStars, i, $event)">
+                  <i *ngIf="item.isActive" class="icon {{item.iconActive}} icon-medium"></i>
+                  <i *ngIf="!item.isActive" class="icon {{item.iconInactive}} icon-medium"></i>
+                </span>
+                <span class="ion-margin-start font-bold text-size-xs">
+                  {{data.reviews}}</span>
+              </ion-label>
+            </ion-item>
+            <ion-card-content>
+              <h1 class="text-size-md font-medium no-margin
+              text-color-primary ion-text-wrap">{{data.titleDescription}}</h1>
+              <p class="ion-padding-top ion-text-wrap
+              text-color-secondary text-size-xs">{{data.contentDescription}}</p>
+              <!--- Info Section -->
+              <ion-list lines="none">
+                <ion-item class="ion-no-padding">
+                  <i slot="start" class="icon {{data.iconLoacation}} icon-medium"></i>
+                  <p class="ion-no-margin font-bold text-size-xs">{{data.iconLoacationText}}</p>
+                </ion-item>
+                <ion-item class="ion-no-padding">
+                  <i slot="start" class="icon {{data.iconWatch}} icon-medium"></i>
+                  <p class="ion-no-margin font-bold text-size-xs">{{data.iconWatchText}}</p>
+                </ion-item>
+                <ion-item class="ion-no-padding">
+                  <i slot="start" class="icon {{data.iconPhone}} icon-medium"></i>
+                  <p class="ion-no-margin font-bold text-size-xs">{{data.iconPhoneText}}</p>
+                </ion-item>
+                <ion-item class="ion-no-padding">
+                  <i slot="start" class="icon {{data.iconEarth}} icon-medium"></i>
+                  <p class="ion-no-margin font-bold text-size-xs">{{data.iconEarthText}}</p>
+                </ion-item>
+                <ion-item class="ion-no-padding">
+                  <i slot="start" class="icon {{data.iconEmail}} icon-medium"></i>
+                  <p class="ion-no-margin font-bold text-size-xs">{{data.iconEmailText}}</p>
+                </ion-item>
+              </ion-list>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
+</ion-page>

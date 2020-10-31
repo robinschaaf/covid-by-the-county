@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "35746781300",
+    "firebase_url": "https://covid-counts.firebaseio.com",
+    "project_id": "covid-counts",
+    "storage_bucket": "covid-counts.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:35746781300:android:6ede58ab8dfe34a17b1921",
+        "android_client_info": {
+          "package_name": "com.cottrell.covidcount"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "35746781300-3dh4fa5vpaon3c8mp593b5mbpu7r8mee.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzgp5DbkGCr9Zz4oZojjTUpQpP1P0fQVY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "35746781300-3dh4fa5vpaon3c8mp593b5mbpu7r8mee.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

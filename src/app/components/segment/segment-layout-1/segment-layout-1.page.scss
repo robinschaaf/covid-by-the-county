@@ -1,0 +1,18 @@
+/* Settings Button
+===========================================*/
+.page1,
+.page2 {
+  .background-size {
+    height: 250px;
+  }
+}
+
+.page3 {
+  ion-list-header {
+
+    ion-button {
+      display: flex;
+      align-self: flex-end;
+    }
+  }
+}
